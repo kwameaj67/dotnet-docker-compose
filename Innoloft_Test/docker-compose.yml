@@ -1,0 +1,34 @@
+﻿version: '3.8'
+
+volumes:
+  datafiles:
+
+# application dependencies
+services:
+  database:
+   image: mysql:8.0.33 
+   container_name: innoloft-db
+   ports:
+     - "3306:3306"
+   volumes:
+     - datafiles:/var/lib/mysql
+   restart: always
+   environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_PASSWORD: mysql
+      MYSQL_DATABASE: innoloft
+ 
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+     - database
+    image: docker-api
+    container_name: innoloft-api
+    ports:
+      - "5000:80"
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    #   DB_CONNECTIONSTRING: "Data Source='innnoloft-db';port=3306;Initial Catalog='Innoloft';User ID=root;Password=my-secret-pw"
