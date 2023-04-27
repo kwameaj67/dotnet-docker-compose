@@ -18,7 +18,6 @@ namespace Innoloft_Test.Models
         public DateTimeOffset? end_date { get; set; }
         public DateTimeOffset? created_at { get; set; }
         public DateTimeOffset? updated_at { get; set; }
-
         public Guid event_creator_id { get; set; } = Guid.Empty;
 
     }

@@ -6,7 +6,6 @@ namespace Innoloft_Test.Models
     {
         public Guid id { get; set; } = Guid.Empty;
         public Guid event_id { get; set; } = Guid.Empty;
-        public Guid creator_id { get; set; } = Guid.Empty;
         public Guid participant_id { get; set; }
     }
 

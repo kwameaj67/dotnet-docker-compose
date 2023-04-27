@@ -134,5 +134,31 @@ namespace Innoloft_Test.Repositories
             }
             return creator;
         }
+
+        public async Task<EventParticipation> AttendEvent(Guid event_id, Guid user_id)
+        {
+            var valid_event = await _context.events.FindAsync(event_id);
+            
+            if(valid_event == null)
+            {
+                return null;
+            }
+
+            var participation = new EventParticipation()
+            {
+                id = Guid.NewGuid(),
+                event_id = valid_event.id,
+                participant_id = user_id
+            };
+
+            await _context.event_participation.AddAsync(participation);
+            await _context.SaveChangesAsync();
+            return participation;
+        }
+
+        public async Task<IEnumerable<EventParticipation>> GetAllEventParticipation()
+        {
+            return await _context.event_participation.ToListAsync();
+        }
     }
 }

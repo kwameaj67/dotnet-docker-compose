@@ -109,7 +109,33 @@ namespace Innoloft_Test.Controllers
             return Ok(new { data = updatedEvent, message = "Event updated sucessfully" });
         }
 
+        [HttpPost("event/attend")]
+        [SwaggerOperation(Summary = "registers a user for an event")]
+        public async Task<ActionResult<EventParticipation>> ParticipateEvent(EventParticipation participation)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var event_participation = await _eventRepo.GetAllEventParticipation();
 
+            var getDuplicateRegistration = event_participation.Where(v => v.event_id == participation.event_id && v.participant_id == participation.participant_id);
+
+            if (getDuplicateRegistration.Any())
+            {
+                return Conflict($"User {participation.participant_id} cannot register for the same event.");
+            }
+
+            var result = await _eventRepo.AttendEvent(participation.event_id, participation.participant_id);
+
+            if (result == null)
+            {
+                return BadRequest($"Event with Id: {participation.event_id} is not valid");
+            }
+
+            return Created("", new { data = result, message = $"User {participation.participant_id} has successfully registered for event" });
+        }
+       
         [HttpDelete("event/delete/{id}")]
         [SwaggerOperation(Summary = "returns a deleted event.", Description = "This actions deletes an event")]
         public async Task<ActionResult<Event>> DeleteEvent(Guid id)

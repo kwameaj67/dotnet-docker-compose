@@ -23,6 +23,10 @@ namespace Innoloft_Test.Interfaces
 
         Task<Event?> UpdateEvent(Event _event, Guid id);
 
+        Task<IEnumerable<EventParticipation>> GetAllEventParticipation();
+
+        Task<EventParticipation> AttendEvent(Guid event_id, Guid user_id);
+
         Task InviteParticipant(Guid event_id);
 
         Task<IEnumerable<Event>> GetCreatorEvents(Guid event_creator_id);
