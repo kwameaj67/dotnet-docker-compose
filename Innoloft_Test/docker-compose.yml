@@ -17,6 +17,7 @@ services:
       MYSQL_ROOT_PASSWORD: my-secret-pw
       MYSQL_PASSWORD: mysql
       MYSQL_DATABASE: innoloft
+      MYSQL_USER: root
  
   api:
     build: 
