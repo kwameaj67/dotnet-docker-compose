@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen(c => {
     {
         Title = "Innoloft",
         Version = "v1",
-        Description = "API for AS TEST"
+        Description = "API for Innoloft"
     });
     c.EnableAnnotations();
 });
