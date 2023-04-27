@@ -31,7 +31,6 @@ namespace Innoloft.UnitTest
 
             //act
             var result = await controller.GetEventCreators();
-            Console.WriteLine(result);
 
             //assert
             Assert.NotNull(result);
