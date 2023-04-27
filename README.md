@@ -1,8 +1,8 @@
 
 # Instructions
-* This project uses .net 6 as target. 
+* This project uses .NET 6 as target. 
 * Clone repository. 
-* Make sure your current dotnet version is running the .net6 sdk.
+* Make sure your current dotnet version is running the .NET 6 sdk.
 * In project directory, run `docker-compose build` to build image.
 * Run  `docker-compose up` to create container. 
 * Create new connection in  `Mysql WorkBench` with `Hostname: host.docker.internal` and use value of `MYSQL_ROOT_PASSWORD` as password in docker-compose file.
